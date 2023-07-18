@@ -10,4 +10,14 @@ public class Address {
     private String city;
     private String street;
     private String zipcode;
+
+    protected Address() {
+    }
+
+    // 값 타입은 기본적으로 setter 비제공
+    public Address(String city, String street, String zipcode) {
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
 }
