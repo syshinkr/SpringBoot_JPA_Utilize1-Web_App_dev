@@ -1,17 +1,20 @@
 package jpabook.jpashop.repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    // @PersistenceContext
+    // Spring Data JPA 가 @AutoWired 로 치환을 지원해준다
+    // @AutoWired 는 생성자가 하나뿐이면 선언하지 않아도 적용된다
+    private final EntityManager em;
 
     public void save(Member member) {
         em.persist(member);
