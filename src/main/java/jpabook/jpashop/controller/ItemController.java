@@ -63,14 +63,19 @@ public class ItemController {
     }
 
     @PostMapping("/items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form) {
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
         Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+        // 이와 같이 식별자(id)가 있는 엔티티는 JPA 에 들어갔던 객체라는 뜻
+        // 이런 엔티티는 준영속 엔티티로 본다
+        // 준영속 엔티티 : 영속성 컨텍스트가 더는 관리하지 않는 엔티티
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
 
         itemService.saveItem(book);
         return "redirect:/items";
